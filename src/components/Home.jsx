@@ -9,11 +9,10 @@ export default function Home() {
 
   return (
     <>
-      <button onClick={() => console.log(data)}>Click Me</button>
       <Navigation setData={setData} />
       <Container>
         <Row>
-          <Cards setData={data} data={setData} />
+          <Cards data={data} setData={setData} />
         </Row>
       </Container>
     </>

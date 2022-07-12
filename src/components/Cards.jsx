@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import Forms from "./Forms";
 import { useState, useEffect } from "react";
 
-export default function Cards({ data }) {
+export default function Cards({ data, setData }) {
   const [show, setShow] = useState(false);
   const handleShow = () => {
     setShow(true);
@@ -29,6 +29,7 @@ export default function Cards({ data }) {
 
   return (
     <>
+      <button onClick={() => console.log(data)}>Click Me</button>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Customer Bill</Modal.Title>
