@@ -2,12 +2,25 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Forms from "./Forms";
+import { v4 as uuidv4 } from "uuid";
+import { getTime12h } from "../helper/Time";
 import { useState, useEffect } from "react";
 import { PARKING_BLUEPRINT } from "../helper/Parking";
 
 export default function Cards({ data, setData }) {
   const [show, setShow] = useState(false);
+  const [parkingBluePrint, setParkingBluePrint] = useState([
+    ...PARKING_BLUEPRINT,
+  ]);
+
+  useEffect(() => {
+    setData((prevValue) => [...prevValue, ...parkingBluePrint]);
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
   const handleShow = () => {
     setShow(true);
   };
@@ -24,22 +37,28 @@ export default function Cards({ data, setData }) {
 
   return (
     <>
-      {PARKING_BLUEPRINT &&
-        PARKING_BLUEPRINT.map((item, index) => (
+      {data &&
+        data.map((item, index) => (
           <>
             <Modal show={show} onHide={handleClose} key={index}>
               <Modal.Header closeButton>
-                <Modal.Title>Customers {item.name} Bill</Modal.Title>
+                <Modal.Title>{`Customer's ${item.name} receipt`}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                Customer total bill is{" "}
-                <strong style={{ color: "red" }}>1000</strong> Pesos Parking
+                Reference ID : {uuidv4()}
+                <br />
+                Name: {item.name && item.name}
+                <br />
+                TIME-IN {item.time && item.time}
+                <br />
+                TIME-OUT: {getTime12h()}
                 <br />
                 Type: {item.type && item.type}
+                <br />
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="outline-success" onClick={handleSubmit}>
-                  Customer Paid
+                  Print Receipt
                 </Button>
                 <Button variant="outline-danger" onClick={handleClose}>
                   Cancel
