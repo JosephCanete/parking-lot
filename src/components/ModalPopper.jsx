@@ -3,11 +3,27 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Forms from "./Forms";
 
-export default function ModalPopper() {
+export default function ModalPopper({ setData }) {
   const [show, setShow] = useState(false);
+  const [formData, setFormData] = useState([
+    {
+      name: "",
+      type: "",
+      time: "",
+    },
+  ]);
 
-  const handleShow = () => setShow(true);
-  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setShow(true);
+  };
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const handleSubmit = () => {
+    // console.log("FormData", formData);
+    handleClose();
+  };
 
   return (
     <>
@@ -19,10 +35,10 @@ export default function ModalPopper() {
           <Modal.Title>Customer Details</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Forms />
+          <Forms setFormData={setFormData} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="outline-success" onClick={handleClose}>
+          <Button variant="outline-success" onClick={handleSubmit}>
             Add Customer
           </Button>
           <Button variant="outline-danger" onClick={handleClose}>
