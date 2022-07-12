@@ -5,14 +5,15 @@ import Cards from "./Cards";
 import { useState } from "react";
 
 export default function Home() {
-  const [data, setData] = useState([{}]);
+  const [data, setData] = useState([]);
 
   return (
     <>
+      <button onClick={() => console.log(data)}>Click Me</button>
       <Navigation setData={setData} />
       <Container>
         <Row>
-          <Cards />
+          <Cards setData={data} data={setData} />
         </Row>
       </Container>
     </>

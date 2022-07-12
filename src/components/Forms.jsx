@@ -3,35 +3,41 @@ import Dropdown from "react-bootstrap/Dropdown";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Forms({ setFormData }) {
   const [name, setName] = useState("");
+  const [plateNumber, setPlateNumber] = useState("");
   const [time, setTime] = useState("");
   const [type, setType] = useState("");
 
-  const data = [];
+  useEffect(() => {
+    setFormData({
+      name: name,
+      plateNumber: plateNumber,
+      time: time,
+      type: type,
+      vacant: false,
+    });
+  }, [name, plateNumber, time, type]);
 
   const setNameEvent = (event) => {
     setName(event.target.value);
-    // console.log(event.target);
-    // data.push({ name: name });
+  };
+
+  const setPlateNumberEvent = (event) => {
+    setPlateNumber(event.target.value);
   };
 
   const setTypeEvent = (event) => {
-    console.log(event);
     if (event === "SP") return setType("Small Parking");
     if (event === "MP") return setType("Medium Parking");
     if (event === "LP") return setType("Large Parking");
-    // data.push({ name: type });
   };
 
   const setTimeEvent = (event) => {
-    // setTime(event.target.value);
-    // data.push({ time: time });
-    // console.log(data);
+    setTime(event.target.value);
   };
-
   return (
     <Form>
       <Form.Group className="mb-1" controlId="formGroupEmail">
@@ -41,15 +47,25 @@ export default function Forms({ setFormData }) {
           placeholder="Enter full name"
           value={name}
           onChange={(event) => setNameEvent(event)}
-          onFocus={(event) => setNameEvent(event)}
-          onBlur={(event) => setNameEvent(event)}
+          required={true}
+        />
+
+        <Form.Label>Plate Number</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Example, C2-Y223"
+          value={plateNumber}
+          onChange={(event) => setPlateNumberEvent(event)}
+          required={true}
         />
         <InputGroup className="mt-3 mb-3">
           <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              {type ? type : "Select Type of Vehicle"}
-            </Dropdown.Toggle>
-            <DropdownButton title="" className="mt-2" onSelect={setTypeEvent}>
+            <DropdownButton
+              title={type ? type : "Select Type of Vehicle"}
+              className="mt-2"
+              onSelect={setTypeEvent}
+              required={true}
+            >
               <Dropdown.Item eventKey="SP">Small Parking</Dropdown.Item>
               <Dropdown.Item eventKey="MP">Medium Parkin</Dropdown.Item>
               <Dropdown.Item eventKey="LP">Large Parking</Dropdown.Item>
@@ -59,10 +75,8 @@ export default function Forms({ setFormData }) {
         <Form.Label>Time</Form.Label>
         <Form.Control
           type="time"
-          placeholder="Enter email"
-          onChange={(event) => setTimeEvent(event)}
-          onFocus={(event) => setTimeEvent(event)}
           onBlur={(event) => setTimeEvent(event)}
+          required={true}
         />
       </Form.Group>
     </Form>

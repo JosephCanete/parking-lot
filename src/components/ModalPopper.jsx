@@ -8,6 +8,7 @@ export default function ModalPopper({ setData }) {
   const [formData, setFormData] = useState([
     {
       name: "",
+      plateNumber: "",
       type: "",
       time: "",
     },
@@ -21,8 +22,19 @@ export default function ModalPopper({ setData }) {
   };
 
   const handleSubmit = () => {
-    // console.log("FormData", formData);
+    if (
+      formData.name === "" ||
+      formData.plateNumber === "" ||
+      formData.type === "" ||
+      formData.time === ""
+    ) {
+      return alert(
+        `Please check "Name" , "Plate" , "Number" , "Type",  Time one of them is empty...`
+      );
+    }
+    console.log("FormData", formData);
     handleClose();
+    setData((prevValue) => [...prevValue, { ...formData }]);
   };
 
   return (
