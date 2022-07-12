@@ -1,11 +1,12 @@
+import { useState, useEffect } from "react";
+import { PARKING_BLUEPRINT } from "../helper/Parking";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { v4 as uuidv4 } from "uuid";
-import { getTime12h } from "../helper/Time";
-import { useState, useEffect } from "react";
-import { PARKING_BLUEPRINT } from "../helper/Parking";
+import { calculateRates } from "../helper/Rates";
+import { getCurrentTime12h } from "../helper/Time";
 
 export default function Cards({ data, setData }) {
   const [show, setShow] = useState(false);
@@ -51,10 +52,17 @@ export default function Cards({ data, setData }) {
                 <br />
                 TIME-IN {item.time && item.time}
                 <br />
-                TIME-OUT: {getTime12h()}
+                TIME-OUT: {getCurrentTime12h()}
                 <br />
                 Type: {item.type && item.type}
                 <br />
+                <strong>
+                  Total Amount:{" "}
+                  {calculateRates(
+                    item.type,
+                    parseInt(item.time) - parseInt(getCurrentTime12h())
+                  )}
+                </strong>
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="outline-success" onClick={handleSubmit}>

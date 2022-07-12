@@ -1,4 +1,4 @@
-const getTime12h = () => {
+const getCurrentTime12h = () => {
   let time = new Date();
   return time.toLocaleString("en-US", {
     hour: "numeric",
@@ -7,4 +7,4 @@ const getTime12h = () => {
   });
 };
 
-export { getTime12h };
+export { getCurrentTime12h };

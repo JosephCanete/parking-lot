@@ -15,7 +15,11 @@ export default function Forms({ setFormData }) {
     setFormData({
       name: name,
       plateNumber: plateNumber,
-      time: time,
+      time: time.toLocaleString("en-US", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      }),
       type:
         type === "Small Parking"
           ? "SP"
