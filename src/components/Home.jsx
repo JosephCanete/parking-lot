@@ -1,12 +1,17 @@
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 import Navigation from "./Navigation";
-import Header from "./Header";
 import Cards from "./Cards";
 
 export default function Home() {
   return (
     <>
       <Navigation />
-      <Home />
+      <Container>
+        <Row>
+          <Cards />
+        </Row>
+      </Container>
     </>
   );
 }
