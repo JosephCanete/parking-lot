@@ -16,7 +16,14 @@ export default function Forms({ setFormData }) {
       name: name,
       plateNumber: plateNumber,
       time: time,
-      type: type,
+      type:
+        type === "Small Parking"
+          ? "SP"
+          : type === "Medium Parking"
+          ? "MP"
+          : type === "Large Parking"
+          ? "LP"
+          : "",
       vacant: false,
     });
   }, [name, plateNumber, time, type]);
