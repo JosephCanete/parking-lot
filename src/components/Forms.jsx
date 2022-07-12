@@ -1,6 +1,8 @@
 import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import InputGroup from "react-bootstrap/InputGroup";
+import DropdownButton from "react-bootstrap/DropdownButton";
+
 import { useState } from "react";
 
 export default function Forms({ setFormData }) {
@@ -17,13 +19,15 @@ export default function Forms({ setFormData }) {
   };
 
   const setTypeEvent = (event) => {
-    // setType(event.target.value);
+    console.log(event);
+    if (event === "SP") return setType("Small Parking");
+    if (event === "MP") return setType("Medium Parking");
+    if (event === "LP") return setType("Large Parking");
     // data.push({ name: type });
-    console.log(event.target);
   };
 
   const setTimeEvent = (event) => {
-    setTime(event.target.value);
+    // setTime(event.target.value);
     // data.push({ time: time });
     // console.log(data);
   };
@@ -45,18 +49,11 @@ export default function Forms({ setFormData }) {
             <Dropdown.Toggle variant="success" id="dropdown-basic">
               {type ? type : "Select Type of Vehicle"}
             </Dropdown.Toggle>
-
-            <Dropdown.Menu className="mt-3">
-              <Dropdown.Item value={"SP"} onClick={setTypeEvent}>
-                Small Parking
-              </Dropdown.Item>
-              <Dropdown.Item value={"MP"} onClick={setTypeEvent}>
-                Medium Parkin
-              </Dropdown.Item>
-              <Dropdown.Item value={"LP"} onClick={setTypeEvent}>
-                Large Parking
-              </Dropdown.Item>
-            </Dropdown.Menu>
+            <DropdownButton title="" className="mt-2" onSelect={setTypeEvent}>
+              <Dropdown.Item eventKey="SP">Small Parking</Dropdown.Item>
+              <Dropdown.Item eventKey="MP">Medium Parkin</Dropdown.Item>
+              <Dropdown.Item eventKey="LP">Large Parking</Dropdown.Item>
+            </DropdownButton>
           </Dropdown>
         </InputGroup>
         <Form.Label>Time</Form.Label>
