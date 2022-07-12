@@ -97,4 +97,10 @@ const PARKING_BLUEPRINT = [
   },
 ];
 
-export { PARKING_BLUEPRINT };
+const SMALL = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+const MEDIUM = ["1", "2", "3", "4", "5", "6", "7", "8"];
+const LARGE = ["1", "2", "3", "4"];
+
+const getRandParkingId = (min, max) => Math.random() * (max - min) + min;
+
+export { PARKING_BLUEPRINT, getRandParkingId, SMALL, MEDIUM, LARGE };

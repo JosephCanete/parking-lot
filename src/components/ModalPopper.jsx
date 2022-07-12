@@ -11,6 +11,7 @@ export default function ModalPopper({ setData }) {
       plateNumber: "",
       type: "",
       time: "",
+      pixel: 0,
     },
   ]);
 

@@ -2,6 +2,7 @@ import Form from "react-bootstrap/Form";
 import Dropdown from "react-bootstrap/Dropdown";
 import InputGroup from "react-bootstrap/InputGroup";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import { getRandParkingId, SMALL, MEDIUM, LARGE } from "../helper/Parking";
 
 import { useState, useEffect } from "react";
 
@@ -10,6 +11,7 @@ export default function Forms({ setFormData }) {
   const [plateNumber, setPlateNumber] = useState("");
   const [time, setTime] = useState("");
   const [type, setType] = useState("");
+  const [pixel, setPixel] = useState("");
 
   useEffect(() => {
     setFormData({
@@ -29,6 +31,7 @@ export default function Forms({ setFormData }) {
           ? "LP"
           : "",
       vacant: false,
+      pixel: pixel,
     });
   }, [name, plateNumber, time, type]);
 
@@ -44,6 +47,10 @@ export default function Forms({ setFormData }) {
     if (event === "SP") return setType("Small Parking");
     if (event === "MP") return setType("Medium Parking");
     if (event === "LP") return setType("Large Parking");
+  };
+
+  const setPixelEvent = (event) => {
+    setPixel(event);
   };
 
   const setTimeEvent = (event) => {
@@ -82,7 +89,52 @@ export default function Forms({ setFormData }) {
               <Dropdown.Item eventKey="LP">Large Parking</Dropdown.Item>
             </DropdownButton>
           </Dropdown>
+          {type && type === "Small Parking" ? (
+            <Dropdown>
+              <DropdownButton
+                title={"Small Available Slots"}
+                className="mt-2"
+                onSelect={setPixelEvent}
+                required={true}
+              >
+                {SMALL.map((item, index) => (
+                  <Dropdown.Item eventKey={item} key={index}>
+                    Parking {item}
+                  </Dropdown.Item>
+                ))}
+              </DropdownButton>
+            </Dropdown>
+          ) : type && type === "Medium Parking" ? (
+            <DropdownButton
+              title={"Medium Available Slots"}
+              className="mt-2"
+              onSelect={setPixelEvent}
+              required={true}
+            >
+              {MEDIUM.map((item, index) => (
+                <Dropdown.Item eventKey={item} key={index}>
+                  Parking {item}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+          ) : type && type === "Large Parking" ? (
+            <DropdownButton
+              title={"Large Available Slots"}
+              className="mt-2 btn btn-success"
+              onSelect={setPixelEvent}
+              required={true}
+            >
+              {LARGE.map((item, index) => (
+                <Dropdown.Item eventKey={item} key={index}>
+                  Parking {item}
+                </Dropdown.Item>
+              ))}
+            </DropdownButton>
+          ) : (
+            ""
+          )}
         </InputGroup>
+
         <Form.Label>Time</Form.Label>
         <Form.Control
           type="time"

@@ -76,14 +76,8 @@ export default function Cards({ data, setData }) {
             <Card style={{ width: "16em", margin: "2rem" }}>
               <Card.Body>
                 <Card.Title>{`${
-                  item.type === "SP"
-                    ? "S"
-                    : item.type === "MP"
-                    ? "M"
-                    : item.type === "L"
-                    ? "L"
-                    : ""
-                } Parking No: ${item.pixel}`}</Card.Title>
+                  index < 4 ? "Small" : index < 8 ? "Medium" : "Large"
+                } Parking: ${item.pixel}`}</Card.Title>
                 <Card.Text>
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
                   iusto quae repellat? Ea, accusantium ipsam, veniam itaque.
