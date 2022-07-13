@@ -9,7 +9,7 @@ export default function Home() {
 
   return (
     <>
-      <Navigation setData={setData} />
+      <Navigation setData={setData} data={data} />
       <Container>
         <Row>
           <Cards data={data} setData={setData} />

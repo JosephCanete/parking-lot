@@ -1,5 +1,13 @@
 const PARKING_BLUEPRINT = [
   {
+    pixel: 0,
+    name: "",
+    plateNumber: "",
+    time: "",
+    type: "",
+    vacant: true,
+  },
+  {
     pixel: 1,
     name: "",
     plateNumber: "",
@@ -87,19 +95,11 @@ const PARKING_BLUEPRINT = [
     type: "",
     vacant: true,
   },
-  {
-    pixel: 12,
-    name: "",
-    plateNumber: "",
-    time: "",
-    type: "",
-    vacant: true,
-  },
 ];
 
-const SMALL = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-const MEDIUM = ["1", "2", "3", "4", "5", "6", "7", "8"];
-const LARGE = ["1", "2", "3", "4"];
+const SMALL = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];
+const MEDIUM = ["4", "5", "6", "7", "8", "9", "10", "11"];
+const LARGE = ["8", "9", "10", "11"];
 
 const getRandParkingId = (min, max) => Math.random() * (max - min) + min;
 

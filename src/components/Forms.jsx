@@ -6,7 +6,7 @@ import { getRandParkingId, SMALL, MEDIUM, LARGE } from "../helper/Parking";
 
 import { useState, useEffect } from "react";
 
-export default function Forms({ setFormData }) {
+export default function Forms({ setFormData, data }) {
   const [name, setName] = useState("");
   const [plateNumber, setPlateNumber] = useState("");
   const [time, setTime] = useState("");
@@ -92,7 +92,8 @@ export default function Forms({ setFormData }) {
           {type && type === "Small Parking" ? (
             <Dropdown>
               <DropdownButton
-                title={"Small Available Slots"}
+                title={`Parking No: ${pixel && pixel}`}
+                variant="outline-success"
                 className="mt-2"
                 onSelect={setPixelEvent}
                 required={true}
@@ -106,7 +107,8 @@ export default function Forms({ setFormData }) {
             </Dropdown>
           ) : type && type === "Medium Parking" ? (
             <DropdownButton
-              title={"Medium Available Slots"}
+              title={`Parking No: ${pixel}`}
+              variant="outline-success"
               className="mt-2"
               onSelect={setPixelEvent}
               required={true}
@@ -119,8 +121,8 @@ export default function Forms({ setFormData }) {
             </DropdownButton>
           ) : type && type === "Large Parking" ? (
             <DropdownButton
-              title={"Large Available Slots"}
-              className="mt-2 btn btn-success"
+              title={`Parking No: ${pixel}`}
+              variant="outline-success"
               onSelect={setPixelEvent}
               required={true}
             >
